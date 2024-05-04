@@ -5,12 +5,11 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
-const booleanParser = require('boolean-parser');
+// const booleanParser = require('boolean-parser');
 
 // server setup initialization
 const app = express();
 app.use(express.json());
-app.use(booleanParser());
 app.use(helmet());
 app.use(
 	cors({

@@ -1,0 +1,12 @@
+{
+  "name": "pg_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

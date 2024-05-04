@@ -1,4 +1,4 @@
-const clusters = require('node:clusters');
+const clusters = require('node:cluster');
 const threadsLimit = 3;
 
 if (clusters.isPrimary) {

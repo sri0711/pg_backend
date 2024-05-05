@@ -1,27 +1,28 @@
 require('express-async-errors');
 
 // program import sections
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const morgan = require('morgan');
+const Express = require('express');
+const Helmet = require('helmet');
+const Cors = require('cors');
+const Morgan = require('morgan');
 // const booleanParser = require('boolean-parser');
 
 // server setup initialization
-const app = express();
-app.use(express.json());
-app.use(helmet());
-app.use(
-	cors({
+const App = Express();
+App.use(Express.json());
+App.use(Helmet());
+App.use(
+	Cors({
 		origin: '*',
 	})
 );
-app.use(morgan('dev'));
+App.use(Morgan('dev'));
 
 // Route Configurations
+App.use('/api/users/', require('./Routes/UserRoute'));
 
 //  global route handler
-app.use('*', (request, response) => {
+App.use('*', (request, response) => {
 	return response.status(404).send({
 		status: false,
 		message: 'invalid route or method',
@@ -29,7 +30,7 @@ app.use('*', (request, response) => {
 });
 
 // global error handlers
-app.use((error, request, response) => {
+App.use((error, request, response) => {
 	if (error) {
 		return response.status(500).send({
 			status: false,
@@ -38,4 +39,4 @@ app.use((error, request, response) => {
 	}
 });
 
-require('./app/connection').establish(app);
+require('./App/Connection').establish(App);

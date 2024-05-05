@@ -1,3 +1,5 @@
+const dotEnv = require('dotenv');
+dotEnv.config({path: './bin/.env'});
 const clusters = require('node:cluster');
 const threadsLimit = 3;
 
@@ -13,5 +15,5 @@ if (clusters.isPrimary) {
 		clusters.fork();
 	});
 } else {
-	require('../source/server');
+	require('../source/Server');
 }

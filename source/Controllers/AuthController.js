@@ -9,14 +9,14 @@ const AuthController = {
 			let requestData = request?.body;
 			let isAdmin = false;
 			let user = await UserModel.findOne({
-				$or: [{user_name: requestData?.user}, {email: requestData?.email}],
+				$or: [{user_name: requestData?.user}, {email: requestData?.user}],
 			}).lean();
 
 			if (!user) {
 				user = await AdminModel.findOne({
-					$or: [{user_name: requestData?.user}, {email: requestData?.email}],
-                }).lean();
-                isAdmin = true;
+					$or: [{user_name: requestData?.user}, {email: requestData?.user}],
+				}).lean();
+				isAdmin = true;
 				if (!user) {
 					return {
 						error: {

@@ -1,5 +1,5 @@
 const Utils = require('../Helpers/Utils');
-const UserModel = require('../model/UserModel');
+const UserModel = require('../Model/UserModel');
 
 const UserController = {
 	createUser: async (request) => {

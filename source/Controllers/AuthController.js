@@ -1,7 +1,7 @@
 const UserModel = require('../model/UserModel');
 const bcrypt = require('bcrypt');
 const jsonWebToken = require('jsonwebtoken');
-const AdminModel = require('../model/AdminModel');
+const AdminModel = require('../Model/AdminModel');
 
 const AuthController = {
 	login: async (request) => {

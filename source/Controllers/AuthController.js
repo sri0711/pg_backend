@@ -48,6 +48,7 @@ const AuthController = {
 					user_name: user?.user_name,
 					phone: user?.phone,
 					email: user?.email,
+					role: user?.role,
 					is_admin: isAdmin,
 					token: token,
 				},

@@ -7,13 +7,17 @@ const adminSchema = PgDatabase.Schema(
 			unique: true,
 			required: true,
 		},
+		user_name: {
+			type: String,
+			required: true,
+		},
 		name: {
 			type: String,
 			required: true,
 		},
 		email: {
 			type: String,
-			default: '',
+			required: true,
 		},
 		phone: {
 			country: {
@@ -41,7 +45,6 @@ const adminSchema = PgDatabase.Schema(
 	},
 	{
 		timestamp: true,
-		_id: false,
 	}
 );
 

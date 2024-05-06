@@ -1,13 +1,11 @@
 const Express = require('express');
 const Route = Express.Router();
-const UserController = require('../Controllers/UserController');
+const AuthController = require('../Controllers/AuthController');
 const Responder = require('../App/Responder');
 
-Route.post('/create', async (request, response) => {
-	let result = await UserController.createUser(request);
+Route.post('/login', async (request, response) => {
+	let result = await AuthController.login(request);
 	return Responder(response, result);
 });
-
-
 
 module.exports = Route;

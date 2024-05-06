@@ -1,10 +1,15 @@
 const PgDatabase = require('../App/Connection').paymentGateWayDatabase();
+const bcrypt = require('bcrypt');
 
-const userSchema = PgDatabase.Schema(
+const userSchema = new PgDatabase.Schema(
 	{
 		user_id: {
 			type: String,
 			unique: true,
+			required: true,
+		},
+		user_name: {
+			type: String,
 			required: true,
 		},
 		name: {
@@ -13,7 +18,8 @@ const userSchema = PgDatabase.Schema(
 		},
 		email: {
 			type: String,
-			default: '',
+			required: true,
+			unique: true,
 		},
 		phone: {
 			country: {
@@ -36,9 +42,14 @@ const userSchema = PgDatabase.Schema(
 	},
 	{
 		timestamp: true,
-		_id: false,
 	}
 );
+
+userSchema.pre('save', async function (next) {
+	let salt = bcrypt.genSaltSync(8);
+	this.password = bcrypt.hashSync(this.password, salt);
+	return next();
+});
 
 const UserModel = PgDatabase.model('users', userSchema);
 

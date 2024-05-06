@@ -3,16 +3,12 @@ const TransactionDatabase = require('mongoose');
 
 const connection = {
 	paymentGateWayDatabase: () => {
-		PaymentGateWayDatabase.connect(process.env.PG_DB, {
-			UseUnifiedTopology: true,
-		});
+		PaymentGateWayDatabase.connect(process.env.PG_DB);
 		PaymentGateWayDatabase.set('debug', true);
 		return PaymentGateWayDatabase;
 	},
 	transactionDatabase: () => {
-		TransactionDatabase.connect(process.env.TRANSACTION_DB, {
-			UseUnifiedTopology: true,
-		});
+		TransactionDatabase.connect(process.env.TRANSACTION_DB);
 		TransactionDatabase.set('debug', true);
 		return TransactionDatabase;
 	},

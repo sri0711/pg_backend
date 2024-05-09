@@ -13,8 +13,33 @@ const connection = {
 		return TransactionDatabase;
 	},
 	establish: (app) => {
-		app.listen(process.env.PORT || 3000, () => {
-			console.log(`application started on http://localhost:${process.env.PORT || 3000}`);
+		let paymentGateWayDatabaseCheck = false;
+		let transactionDatabaseCheck = false;
+		let serverSleep = true;
+
+		PaymentGateWayDatabase.connection.on('connected', () => {
+			console.log('paymentGateWayDatabase connection established');
+			paymentGateWayDatabaseCheck = true;
+			app.emit('start');
+		});
+
+		TransactionDatabase.connection.on('connected', () => {
+			console.log('TransactionDatabase connection established');
+			transactionDatabaseCheck = true;
+			app.emit('start');
+		});
+
+		app.on('started', () => {
+			serverSleep = false;
+		});
+
+		app.on('start', () => {
+			if (serverSleep && paymentGateWayDatabaseCheck && transactionDatabaseCheck) {
+				app.listen(process.env.PORT || 3000, () => {
+					app.emit('started');
+					console.log(`application started on http://localhost:${process.env.PORT || 3000}`);
+				});
+			}
 		});
 	},
 };

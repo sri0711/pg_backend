@@ -1,6 +1,6 @@
 const TransDatabase = require('../App/Connection').transactionDatabase();
 
-const TransSchema = TransDatabase.Schema(
+const TransSchema = new TransDatabase.Schema(
 	{
 		transaction_id: {
 			type: String,

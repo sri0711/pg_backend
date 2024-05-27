@@ -13,20 +13,21 @@ App.use(Express.json());
 App.use(Helmet());
 App.use(
 	Cors({
-		origin: '*',
+		origin: '*'
 	})
 );
 App.use(Morgan('dev'));
 
 // Route Configurations
 App.use('/api/users', require('./Routes/UserRoute'));
+App.use('/api/admin', require('./Routes/AdminRoute'));
 App.use('/api/auth', require('./Routes/AuthRoute'));
 
 //  global route handler
 App.use('*', (request, response) => {
 	return response.status(404).send({
 		status: false,
-		message: 'invalid route or method',
+		message: 'invalid route or method'
 	});
 });
 
@@ -36,7 +37,7 @@ App.use((error, request, response, next) => {
 		console.log('error block', error);
 		return response.status(500).send({
 			status: false,
-			message: 'Something went wrong',
+			message: 'Something went wrong'
 		});
 	}
 });

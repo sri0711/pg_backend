@@ -9,20 +9,20 @@ const UserController = {
 			let existCheck = await UserModel.findOne({
 				$or: [
 					{
-						user_name: requestData.user_name,
+						user_name: requestData.user_name
 					},
 					{
-						email: requestData.email,
-					},
-				],
+						email: requestData.email
+					}
+				]
 			});
 
 			if (existCheck) {
 				return {
 					error: {
 						message: 'User already exists',
-						status: 401,
-					},
+						status: 401
+					}
 				};
 			}
 
@@ -33,21 +33,36 @@ const UserController = {
 				email: requestData?.email,
 				phone: {
 					country: requestData?.phone?.country || '91',
-					number: requestData?.phone?.number,
+					number: requestData?.phone?.number
 				},
-				password: requestData?.password,
+				password: requestData?.password
 			};
 
 			let user = new UserModel(userData);
 			await user.save();
 			return {
-				message: 'User created successfully',
+				message: 'User created successfully'
 			};
 		} catch (error) {
 			return {
 				error: {
-					message: 'something went wrong: ' + error.message || error,
-				},
+					message: 'something went wrong: ' + error.message || error
+				}
+			};
+		}
+	},
+	list: async (request) => {
+		try {
+			let users = await UserModel.find().lean();
+			return {
+				message: 'User list',
+				data: users
+			};
+		} catch (error) {
+			return {
+				error: {
+					message: 'something went wrong: ' + error.message || error
+				}
 			};
 		}
 	}

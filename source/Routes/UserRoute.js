@@ -8,6 +8,9 @@ Route.post('/create', async (request, response) => {
 	return Responder(response, result);
 });
 
-
+Route.post('/list', async (request, response) => {
+	let result = await UserController.list(request);
+	return Responder(response, result);
+});
 
 module.exports = Route;
